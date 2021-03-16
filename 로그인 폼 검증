@@ -1,70 +1,69 @@
 public function check(){
-			$this-> form_validation->set_rules('id','account','trim|htmlspecialchars|required|min_length[5]|max_length[30]|alpha_numeric'); // ID
-			$this-> form_validation->set_rules('pwd', 'password', 'trim|htmlspecialchars|required'); // PASSWORD
-			$this-> form_validation->set_rules('check', 'captcha_input_check', 'trim|htmlspecialchars|required'); 
-			$this-> form_validation->set_rules('captcha_word', 'captcha_word', 'trim|htmlspecialchars|required'); 
-			$this-> form_validation->set_rules('csrfToken', 'csrfToken', 'trim|htmlspecialchars|required');
+	$this-> form_validation->set_rules('id','account','trim|htmlspecialchars|required|min_length[5]|max_length[30]|alpha_numeric'); // ID
+	$this-> form_validation->set_rules('pwd', 'password', 'trim|htmlspecialchars|required'); // PASSWORD
+	$this-> form_validation->set_rules('check', 'captcha_input_check', 'trim|htmlspecialchars|required'); 
+	$this-> form_validation->set_rules('captcha_word', 'captcha_word', 'trim|htmlspecialchars|required'); 
+	$this-> form_validation->set_rules('csrfToken', 'csrfToken', 'trim|htmlspecialchars|required');
 
-			$_SESSION['csrfToken_login_check']=isset($_SESSION['csrfToken_login_check']) ? $_SESSION['csrfToken_login_check'] : "안넘어옴";
+	$_SESSION['csrfToken_login_check']=isset($_SESSION['csrfToken_login_check']) ? $_SESSION['csrfToken_login_check'] : "안넘어옴";
 	
-			if ($this->form_validation->run() == TRUE)
-			{
-				$id=set_value('id');
-				$pwd=set_value('pwd'); 
-				$check=set_value('check'); 
-				$captcha_word=set_value('captcha_word'); 
-				$csrfToken=set_value('csrfToken');
-				$_SESSION['csrfToken_login_check']; 
+	if ($this->form_validation->run() == TRUE)
+	{
+		$id=set_value('id');
+		$pwd=set_value('pwd'); 
+		$check=set_value('check'); 
+		$captcha_word=set_value('captcha_word'); 
+		$csrfToken=set_value('csrfToken');
+		$_SESSION['csrfToken_login_check']; 
 
-				$data['list'] = $this->Login_m->get_information($id);
+		$data['list'] = $this->Login_m->get_information($id);
 
-				$pwd_check=password_verify($pwd,$data['list']['pwd']); // Password authentication, true=1
+		$pwd_check=password_verify($pwd,$data['list']['pwd']); // Password authentication, true=1
 
-				$this->checkPassword($data['list']['pwd_error']);
+		$this->checkPassword($data['list']['pwd_error']);
 
-				if($data['list']==null || $data['list']['id']!= $id) //회원정보 검증
-				{
-					$this->alertMessage();
-				}
-				else if( $pwd_check != 1 ) // 해쉬암호 검증
-				{
-					$this->Login_m->password_error_increment($id);
-					$this->alertMessage();
-				}
-				else if( $check!=$captcha_word ) // 캡챠 보안코드 인증
-				{
-					$this->Login_m->password_error_increment($id);
-					$this->alertMessage();
-				}
-				else if($_SESSION['csrfToken_login_check']!=$csrfToken)
-				{
-					$this->alertMessage();
-				}
-				else
-				{
-					$this->Login_m->password_error_reset($id);
-					$_SESSION['adm_id'.$id] = $id;
-					$_SESSION['id']=$id;
-					$_SESSION['expire'] = time() + (3*3600);
-					echo "<script>location.href='/admin/Notice'</script>";
-					
-				}
-			}
-			else
-			{
-				echo "<script>alert('입력하신 정보가 올바르지 않습니다.');</script>";
-				echo "<script>location.href='/admin/login'</script>";
-			}
+		if($data['list']==null || $data['list']['id']!= $id) //회원정보 검증
+		{
+			$this->alertMessage();
 		}
+		else if( $pwd_check != 1 ) // 해쉬암호 검증
+		{
+			$this->Login_m->password_error_increment($id);
+			$this->alertMessage();
+		}
+		else if( $check!=$captcha_word ) // 캡챠 보안코드 인증
+		{
+			$this->Login_m->password_error_increment($id);
+			$this->alertMessage();
+		}
+		else if($_SESSION['csrfToken_login_check']!=$csrfToken)
+		{
+			$this->alertMessage();
+		}
+		else
+		{
+			$this->Login_m->password_error_reset($id);
+			$_SESSION['adm_id'.$id] = $id;
+			$_SESSION['id']=$id;
+			$_SESSION['expire'] = time() + (3*3600);
+			echo "<script>location.href='/admin/Notice'</script>";	
+		}
+	}
+	else
+	{
+		echo "<script>alert('입력하신 정보가 올바르지 않습니다.');</script>";
+		echo "<script>location.href='/admin/login'</script>";
+	}
+}
     
-    public function checkPassword(string $pwd) : void {
-			if($pwd >=10) {
-				echo "<script>alert('이 계정은 보안상 잠금 처리 되었습니다. 업체에 문의주세요.');</script>";
-				echo "<script>location.href='/admin/login'</script>";
-			}
-		}
+public function checkPassword(string $pwd) : void {
+	if($pwd >=10) {
+		echo "<script>alert('이 계정은 보안상 잠금 처리 되었습니다. 업체에 문의주세요.');</script>";
+		echo "<script>location.href='/admin/login'</script>";
+	}
+}
 
-		public function alertMessage() : void {
-			echo "<script>alert('입력하신 정보가 올바르지 않습니다. 만약, 비밀번호가 10회 이상 틀릴 시 계정이 잠금 처리됩니다.');</script>";
-			echo "<script>location.href='/admin/login'</script>";
-		}
+public function alertMessage() : void {
+	echo "<script>alert('입력하신 정보가 올바르지 않습니다. 만약, 비밀번호가 10회 이상 틀릴 시 계정이 잠금 처리됩니다.');</script>";
+	echo "<script>location.href='/admin/login'</script>";
+}
