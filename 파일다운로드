@@ -1,5 +1,5 @@
 function download($flag,$attfile){
-	$attfile=sanitize_filename(urldecode($attfile)); // Korean-language encoding
+	$attfile=sanitize_filename(urldecode($attfile)); // Korean encoding
 	$attfile=filter_var($attfile,FILTER_SANITIZE_SPECIAL_CHARS);
 	$flag=filter_var($flag,FILTER_SANITIZE_NUMBER_INT);
 	if($flag===false){ echo "<script>alert('올바른 경로가 아닙니다.'); history.back();</script>";}
