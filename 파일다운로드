@@ -1,18 +1,18 @@
 function download($flag,$attfile){
-			$attfile=sanitize_filename(urldecode($attfile)); // Korean-language encoding
-			$attfile=filter_var($attfile,FILTER_SANITIZE_SPECIAL_CHARS);
-			$flag=filter_var($flag,FILTER_SANITIZE_NUMBER_INT);
-			if($flag===false){ echo "<script>alert('올바른 경로가 아닙니다.'); history.back();</script>";}
+	$attfile=sanitize_filename(urldecode($attfile)); // Korean-language encoding
+	$attfile=filter_var($attfile,FILTER_SANITIZE_SPECIAL_CHARS);
+	$flag=filter_var($flag,FILTER_SANITIZE_NUMBER_INT);
+	if($flag===false){ echo "<script>alert('올바른 경로가 아닙니다.'); history.back();</script>";}
 
-			$url=null;
-			switch($flag) 
-			{
-				case 1 : $url = './첨부파일모음1번경로/'.$attfile; break;
-				case 2 : $url = './첨부파일모음2번경로/'.$attfile; break;
-				case 3 : $url = './첨부파일모음3번경로/'.$attfile; break;
-			}
-			if(!$url || !$attfile ){ echo "<script>alert('올바른 경로가 아닙니다.');</script>";  echo "<script>history.back();</script>";}
-			if(!is_file($url)){ echo "<script>alert('파일이 존재하지 않습니다.'); history.back(); </script>"; }
+	$url=null;
+	switch($flag) 
+	{
+		case 1 : $url = './첨부파일모음1번경로/'.$attfile; break;
+		case 2 : $url = './첨부파일모음2번경로/'.$attfile; break;
+		case 3 : $url = './첨부파일모음3번경로/'.$attfile; break;
+	}
+	if(!$url || !$attfile ){ echo "<script>alert('올바른 경로가 아닙니다.');</script>";  echo "<script>history.back();</script>";}
+	if(!is_file($url)){ echo "<script>alert('파일이 존재하지 않습니다.'); history.back(); </script>"; }
       
-			force_download($url,null);			
+	force_download($url,null);			
 }
