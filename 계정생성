@@ -1,5 +1,5 @@
 public function create(){
-  $id = "id"; 
+  	$id = "id"; 
 	$pwd = "password";
 
 	$encrypt=password_hash($pwd,PASSWORD_DEFAULT);
@@ -9,8 +9,8 @@ public function create(){
  
 
 class Signup_m extends CI_Model { 
-public function insert($id,$pwd,$name) {
-			$sql="INSERT INTO admin SET id = ?, pwd = ?";
-			return $binding = $this->db->query($sql,array($id,$pwd)); //query Binding 
+	public function insert($id,$pwd,$name) {
+		$sql="INSERT INTO admin SET id = ?, pwd = ?";
+		return $binding = $this->db->query($sql,array($id,$pwd)); //query Binding 
 		}
 }
