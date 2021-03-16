@@ -1,45 +1,40 @@
 public function Login(){
-			$_SESSION['id']=isset($_SESSION['id']) ? $_SESSION['id'] :null; 
-			if($_SESSION['id']){ 
-				echo "<script>alert('이미 로그인중입니다.')</script>";
-			}
+	$_SESSION['id']=isset($_SESSION['id']) ? $_SESSION['id'] :null; 
+	if($_SESSION['id']){ echo "<script>alert('이미 로그인중입니다.')</script>";}
+	$data['csrfToken']=bin2hex(openssl_random_pseudo_bytes(32)); // Allocate Token
+	$_SESSION['csrfToken_login_check']=$data['csrfToken']; // Allocate SESSION Token
 
-			$data['csrfToken']=bin2hex(openssl_random_pseudo_bytes(32)); // Allocate Token
-			$_SESSION['csrfToken_login_check']=$data['csrfToken']; // Allocate SESSION Token
-
-			$data['cap'] = $this->_auth_img();
-			$this->load->view('뷰페이지',$data);
+	$data['cap'] = $this->_auth_img();
+	$this->load->view('뷰페이지',$data);
 }
 
 function _auth_img(){
-			//$captcha_word = rand(23678190, 96523469);
-			$captcha_word=null;
-			$patten = '123456789QWEERTYUIOPASZDFGHJKLZMXNCBVqpwoeirutyalskdjfhgzmxncb';
-			for($i = 0, $len = strlen($patten) -1; $i < 6; $i++){ //7가지 문자 생성
-				$captcha_word .= $patten[rand(0, $len)];
-			}
+	//$captcha_word = rand(23678190, 96523469);
+	$captcha_word=null;
+	$patten = '123456789QWEERTYUIOPASZDFGHJKLZMXNCBVqpwoeirutyalskdjfhgzmxncb';
+	for($i = 0, $len = strlen($patten) -1; $i < 6; $i++){ //7가지 문자 생성
+		$captcha_word .= $patten[rand(0, $len)];
+	}
 
-			$config = array(
-				'word'	 => $captcha_word,
-				'img_path'      => './captcha/',
-				'img_url'       => '도메인/captcha/', //캡챠 이미지 생성 경로
-				'font_path' => './captcha/OpenSans-Italic.ttf', //폰트
-				'font_size'=> 20,
-				'img_width'	 => 150,
-				'expiration'=>5,
-				'img_height' => 40,
-				'expiration' => 30,
-				'colors'    => array(
-					'background'=> array(255, 255, 255),
-					'border'	=> array(255, 255, 255),
-					'text'		=> array(0, 0, 0),
-					'grid'		=> array(255, 40, 40)
-				)
-			);
-			return create_captcha($config);
-		}
-    
-    
+	$config = array(
+		'word'	 => $captcha_word,
+		'img_path'      => './captcha/',
+		'img_url'       => '도메인/captcha/', //캡챠 이미지 생성 경로
+		'font_path' => './captcha/OpenSans-Italic.ttf', //폰트
+		'font_size'=> 20,
+		'img_width'	 => 150,
+		'expiration'=>5,
+		'img_height' => 40,
+		'expiration' => 30,
+		'colors'    => array(
+			'background'=> array(255, 255, 255),
+			'border'	=> array(255, 255, 255),
+			'text'		=> array(0, 0, 0),
+			'grid'		=> array(255, 40, 40)
+		)
+	);
+	return create_captcha($config);
+}
     
     * 뷰페이지
  <form action="#" method="post">
