@@ -1,0 +1,18 @@
+public function create(){
+  	$insert['id'] = "id"; 
+	$pwd = "password";
+	$insert['name']="이름";
+
+	$insert['encrypt']=password_hash($pwd,PASSWORD_DEFAULT);
+	$result = $this->Signup_m->insert($insert);
+}
+ 
+
+class Signup_m extends CI_Model { 
+	protected $table='admin';
+	public function insert($insert) {
+		$sql="INSERT INTO $this->table 
+			SET id = ?, pwd = ?";
+		$binding = $this->db->query($sql,array($insert['id'], $insert['pwd'] )); //query Binding 
+	}
+}
