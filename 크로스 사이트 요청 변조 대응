@@ -1,0 +1,20 @@
+public function form(){
+  $data['Token']=bin2hex(openssl_random_pseudo_bytes(32));
+	$_SESSION['csrfToken_check']=$data['Token'];
+  $this->load->view('/form',$data);
+}
+
+* View form.php
+<form action="/action" method="post">
+  <input type="hidden" name="Token" value="<?=$Token;?>" >
+  <input type="text" name="names">
+  <input type="text" name="content">
+  <button type="submit">전송</button>
+</form>
+
+public function action()
+{
+  if($_SEESION['csrfToken_check'] == $_POST['Token']) echo "토큰 인증 성공";
+  
+  unset($_SEESION['csrfToken_check']);
+}
