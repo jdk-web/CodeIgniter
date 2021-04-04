@@ -1,0 +1,25 @@
+
+public function method(){
+  if( isset( $_FILES['thumb'] ) ) { //썸네일 이미지 첨부했을때
+					$insert['thumb']=$this->fileupload($_FILES['thumb']); // 일반 첨부
+					$this->ImageResize($insert['thumb'],190,120); //190x120크기 리사이징
+					$this->ImageResize($insert['thumb'],500,320); //500x320크기 리사이징
+					$this->ImageResize($insert['thumb'],800,400); //sns공유용 크기
+				}
+}
+
+public function ImageResize($FileName,int $width, int $height){
+			$uploads_dir=""; //리사이징 이미지 첨부할 이미지 경로
+
+			$config['image_library'] = 'gd2';
+			$config['thumb_marker'] = '_'.$width.'_'.$height;
+			$config['source_image'] = $uploads_dir.$FileName;
+			$config['new_image'] = $uploads_dir;  //이름_thumb.확장자 형식
+			$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = FALSE;
+			$config['width'] = $width;
+			$config['height'] = $height;
+
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+}
