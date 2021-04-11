@@ -1,0 +1,18 @@
+public function _remap($method, $params = array())
+		{	
+			if($method === 'index'){
+				$this->index();
+			}
+			else if($method === 'list'){
+				$this->list();
+			}
+			else if( $method === 'view'){ //파라미터 있을 때
+				$this->view($params);
+			}
+			else if($method === 'write'){
+				$this->write();
+			}
+			else{
+				header('Location: URL 이동');
+			}
+		}
