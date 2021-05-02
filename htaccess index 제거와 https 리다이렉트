@@ -1,4 +1,3 @@
-.ht
 <ifmodule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
@@ -8,3 +7,19 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
 </ifmodule>
+
+
+index 제거 안될 때
+1. 아파치 환경설정 apache.conf 파일에서 rewrite 모듈 설정.
+#LoadModule rewrite_module modules/mod_rewrite.so
+위의 라인이 있다면 #을 제거하여 주석을 제거하고, 없다면 복사해서 붙여넣도록 한다. 
+
+2. .htaccess 파일 설정사용을 위하여 디렉토리 설정을 확인.
+apache.conf 파일 혹은 그 파일에서 로드하고 있는 virtual host 설정등에서 <Directory> 태그를 통하여 디렉토리 설정이 되어있는 경우 AllowOverride All 조건을 설정한다.
+AllowOverride None 이면 index.php 못 없앤다.
+
+<Directory 경로위치> 
+    AllowOverride All
+    Order allow,deny
+    allow from all
+</Directory>
