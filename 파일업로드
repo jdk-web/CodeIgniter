@@ -1,0 +1,21 @@
+private function _fileupload($file,$flag) {
+			$flag=filter_var($flag, FILTER_SANITIZE_NUMBER_INT);
+			switch($flag) // 업로드 디렉터리 설정
+			{
+				case 1 : $uploadBase='./1번URL/'; break;
+				case 2 : $uploadBase='./2번URL/'; break; 
+			}
+			$name =  preg_replace("/[ #\&\+\-%@=\/\\\:;,\'\"\^`~\_|\!\?\*$#<>()\[\]\{\}]/i", "", $file['name']); //특수문자 제거
+			
+			$uploadFile = $uploadBase.$name;
+      $fileinfo=pathinfo($uploadFile);
+			$i=1;
+			while(is_file($uploadFile)) // 서버에 파일 있을 때 다른 파일 이름으로 저장
+			{
+				$name=$fileinfo['filename']."{$i}.".$fileinfo['extension'];
+				$uploadFile= $uploadBase.$name;
+				$i++;
+			}
+			move_uploaded_file($file['tmp_name'], $uploadFile);
+			return $name;
+		}
