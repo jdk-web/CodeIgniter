@@ -1,0 +1,35 @@
+<?php
+	defined('BASEPATH') OR exit('No direct script access allowed');
+	
+	class CommonModule{
+		protected $CI;
+
+        public function __construct()
+        {
+                $this->CI =& get_instance();
+				        $this->CI->load->library('user_agent');	
+        }
+
+		function UserAgentCheckMobile($segment=null) : void { 
+			if($this->CI->agent->is_mobile()==true)
+			{
+				echo $URL="경로";
+				//echo "모바일로 들어왔으니 모바일 공지사항으로 이동합니다";
+				header("location:".$URL);
+			}
+
+		}
+
+		function UserAgentCheckPC($segment=null) : void { 
+			if($this->CI->agent->is_mobile()==false)
+			{
+				//echo "PC로이동";
+				echo $URL="경로";
+				header("location:".$URL);
+
+			}
+		}
+
+		
+	}
+?>
