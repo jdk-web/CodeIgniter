@@ -1,9 +1,0 @@
-<meta property="og:type" content="website" /> 
-<meta property="og:title" content="<?php echo $view['title']; ?>" /> 
-<meta property="og:url" content="<?=$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>" />
-<meta property="og:description" content="예산군 행복마을지원센터" />
-<?php if( $view['th_img']!='' ) { $thumbnail=explode(".", $view['th_img']); ?>
-<meta property="og:image" content="/thumbnail/market/<?=$thumbnail[0].'_760_570.'.$thumbnail[1];?>"/>
-<?php }else{ ?>
-<meta property="og:image" content="https://www.yshap21.or.kr/static/yshap/img/thumbnail.jpg"/>
-<?php } ?>
