@@ -14,7 +14,7 @@
 			if($this->CI->agent->is_mobile()==true)
 			{
 				echo $URL="경로";
-				//echo "모바일로 들어왔으니 모바일 공지사항으로 이동합니다";
+				//echo "모바일로 들어왔으니 모바일 페이지로 이동합니다";
 				header("location:".$URL);
 			}
 
