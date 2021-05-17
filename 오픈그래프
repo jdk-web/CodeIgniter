@@ -1,9 +1,10 @@
+<?php
+	if($this->uri->segment(3)=='faq'){ $title="자주묻는질문"; }
+	else if($this->uri->segment(3)=='notice'){ $title="공지사항"; }
+	else{$title="이름";}
+?>
 <meta property="og:type" content="website" /> 
-<meta property="og:title" content="제목" /> 
+<meta property="og:title" content="<?=$title?>" /> 
 <meta property="og:url" content="<?=$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];?>" />
-<meta property="og:description" content="설명" />
-<?php if( 썸네일 있을때 ) { $thumbnail=explode(".", $썸네일); //리사이징 이미지  ?>
-<meta property="og:image" content="/thumbnail/<?=$thumbnail[0].'_760_570.'.$thumbnail[1];?>"/>
-<?php }else{ //없다면 디폴트 이미지 ?>
-<meta property="og:image" content="디폴트이미지"/>
-<?php } ?>
+<meta property="og:description" content="내용" />
+<meta property="og:image" content="이미지경로"/>
