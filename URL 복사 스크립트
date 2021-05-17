@@ -1,0 +1,9 @@
+function copy(URL) {
+	var dummy = document.createElement("textarea");
+	document.body.appendChild(dummy);
+	dummy.value = URL;
+	dummy.select();
+	document.execCommand("copy");
+	document.body.removeChild(dummy);
+	alert('URL이 복사되었습니다.');
+}
