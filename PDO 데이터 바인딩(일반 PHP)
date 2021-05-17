@@ -1,0 +1,10 @@
+$title="제목";
+$content="내용";
+
+$SQL="INSERT INTO notice
+				SET title=:title, content=:content";
+        
+$stmt = $conn->prepare($SQL);
+$stmt ->bindParam(':title',$title);
+$stmt ->bindParam(':content',$content);
+$stmt->execute();
