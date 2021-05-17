@@ -1,0 +1,26 @@
+Kakao.init('키값');
+
+   function sendLink(url,title,text,img) { // 카카오톡 공유하기
+	if(img==null) { var img='디폴트 썸네일 이미지 경로'; }
+   Kakao.Link.sendDefault({
+	objectType: 'feed',
+	content: {
+    title: title,
+    description: '출처 : 0000 | '+ text,
+    imageUrl: img,
+    link: {
+			mobileWebUrl: 'http://'+url,
+			webUrl: 'http://'+url,
+    },
+  },
+	  buttons: [
+		{
+		  title: '상세 이동',
+		  link: {
+				mobileWebUrl: 'http://'+url,
+				webUrl: 'http://'+url,
+		  },
+		}
+	  ]
+	});
+  }
