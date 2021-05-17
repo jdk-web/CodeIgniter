@@ -1,0 +1,17 @@
+function snsShare(snsName, url,title) {
+	switch(snsName){
+		case 'facebook':
+			window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url));
+		break;
+			
+		case 'twitter' :
+			var content = "예산군행복마을센터";
+			window.open("https://twitter.com/share?url=" + encodeURIComponent(url) + "&text=" + encodeURIComponent(content), 'twitter');
+		break;
+
+		case 'NaverBlog':
+			var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + encodeURI(encodeURIComponent(url)) + "&title=" +  encodeURI(title);
+			window.open(shareURL,"","width=500,height=600");
+		break;
+	}
+}
