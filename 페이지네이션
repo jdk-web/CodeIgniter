@@ -1,41 +1,41 @@
 $config = array();
 
-			$page = ($this->uri->segment(n)) ? $this->uri->segment(n) : 1; //현재 페이지
-			$config['base_url'] = '리스트 페이지 URL';
+$page = ($this->uri->segment(n)) ? $this->uri->segment(n) : 1; //현재 페이지
+$config['base_url'] = '리스트 페이지 URL';
 
-			$config['total_rows'] = $this->모델->getCount($data);
-			$config['per_page'] = 5; $data['per_page']=$config['per_page']; //페이지당 리스트 개수
-			$config['num_links'] = 4;
+$config['total_rows'] = $this->모델->getCount($data);
+$config['per_page'] = 5; $data['per_page']=$config['per_page']; //페이지당 리스트 개수
+$config['num_links'] = 4;
 
-			$data['total_page']=ceil($config['total_rows']/$config['per_page']); //총 페이지 개수
-			$data['from_record']=($page-1)*$config['per_page']; //시작 열
-			$data['total_rows']=$config['total_rows'];
-			$data['page']=$page;
+$data['total_page']=ceil($config['total_rows']/$config['per_page']); //총 페이지 개수
+$data['from_record']=($page-1)*$config['per_page']; //시작 열
+$data['total_rows']=$config['total_rows'];
+$data['page']=$page;
 
-			$config['first_link'] = ''; 
-			$config['first_tag_open'] = '<div class="btn_prevgrp">';
-			$config['first_tag_close'] = '</div>';
+$config['first_link'] = ''; 
+$config['first_tag_open'] = '<div class="btn_prevgrp">';
+$config['first_tag_close'] = '</div>';
 
-			$config['prev_link'] = '';
-			$config['prev_tag_open'] = '<div class="btn_prev">';
-			$config['prev_tag_close'] = '</div>';
+$config['prev_link'] = '';
+$config['prev_tag_open'] = '<div class="btn_prev">';
+$config['prev_tag_close'] = '</div>';
 
-			$config['next_link'] = '';
-			$config['next_tag_open'] = '<div class="btn_next">';
-			$config['next_tag_close'] = '</div>';
+$config['next_link'] = '';
+$config['next_tag_open'] = '<div class="btn_next">';
+$config['next_tag_close'] = '</div>';
 
-			$config['last_link'] = '';
-			$config['last_tag_open'] = '<div class="btn_nextgrp">';
-			$config['last_tag_close'] = '</div>';
+$config['last_link'] = '';
+$config['last_tag_open'] = '<div class="btn_nextgrp">';
+$config['last_tag_close'] = '</div>';
 
-			$config['use_page_numbers'] = TRUE; //현재페이지 주소에 띄우기
-			$config['reuse_query_string'] = true; // get 자동 넘기기
+$config['use_page_numbers'] = TRUE; //현재페이지 주소에 띄우기
+$config['reuse_query_string'] = true; // get 자동 넘기기
 
-			$this->pagination->initialize($config);		
+$this->pagination->initialize($config);		
 
-			$data['list']=$this->모델->getList($data); 
+$data['list']=$this->모델->getList($data); 
 
-			$data["links"] = $this->pagination->create_links();
+$data["links"] = $this->pagination->create_links();
       
       
       * 모델
