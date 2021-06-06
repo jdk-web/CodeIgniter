@@ -1,0 +1,2 @@
+배열 빈값이나 공백있을 떄 제거 => array_filter
+인덱스 재정의 => array_values
