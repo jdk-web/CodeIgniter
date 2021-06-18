@@ -5,7 +5,7 @@ function snsShare(snsName, url,title) {
 		break;
 			
 		case 'twitter' :
-			var content = "예산군행복마을센터";
+			var content = "내용";
 			window.open("https://twitter.com/share?url=" + encodeURIComponent(url) + "&text=" + encodeURIComponent(content), 'twitter');
 		break;
 
