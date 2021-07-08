@@ -1,0 +1,9 @@
+<select name="year">
+	<option value = "">년도</option>
+     <?
+          echo "===" .$year;
+          foreach(range(date('Y'), 2010) as $year) {
+            echo '<option value="'.$year.'">'.$year.'</option>';
+          }       
+      ?>
+</select>
