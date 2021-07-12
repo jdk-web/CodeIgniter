@@ -1,2 +1,3 @@
 배열 빈값이나 공백있을 떄 제거 => array_filter
 인덱스 재정의 => array_values
+DB나 배열 특정 컬럼만 추출하고 싶을 때 => array_column(데이터, '컬럼명')
